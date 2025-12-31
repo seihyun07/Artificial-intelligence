@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 샘플링 비교 시뮬레이터 -21023 주세현</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>랜덤 샘플링 VS 층화 샘플링 -21023주세현</h1>
+        <p>모집단(N=100, 특수 선택집단 10%)에서 <b>표본 크기(n=20)</b> 추출 시 성능 차이 분석</p>
+    </header>
+
+    <div class="comparison-grid">
+        <div class="card">
+            <div class="badge srs-badge">공통 표본 n=20</div>
+            <h2>랜덤 샘플링</h2>
+            <p class="card-desc">조건 없이 무작위 추출. 층간 변동성이 오차에 그대로 포함됩니다.</p>
+            
+            <div id="viz-srs" class="viz-box"></div>
+            
+            <div class="result-stats">
+                <div class="stat-item">
+                    <span class="stat-label">추출된 집단 수</span>
+                    <span id="srs-count" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">통계적 편향</span>
+                    <span id="srs-error" class="stat-value">분석 전</span>
+                </div>
+            </div>
+            
+            <button class="btn-blue" onclick="runSRS()">무작위 추출 실행</button>
+        </div>
+
+        <div class="card">
+            <div class="badge strat-badge">공통 표본 n=20</div>
+            <h2>층화 샘플링</h2>
+            <p class="card-desc">모집단 비율 고정. 조건부 확률을 활용하여 층간 변동성을 수학적으로 제거합니다.</p>
+            
+            <div id="viz-strat" class="viz-box"></div>
+            
+            <div class="result-stats">
+                <div class="stat-item">
+                    <span class="stat-label">추출된 집단 수</span>
+                    <span id="strat-count" class="stat-value">2</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">오차 감소 효과</span>
+                    <span id="strat-error" class="stat-value highlight-ok">최적화 완료</span>
+                </div>
+            </div>
+            
+            <button class="btn-orange" onclick="runStratified()">비율 고정 추출 실행</button>
+        </div>
+    </div>
+
+    <section class="formula-section">
+        <h3>💡 오차 감소의 수학적 근거 (조건부 분산)</h3>
+        <p>층화 샘플링은 층간 차이 오차를 줄여 모델 성능 향상에 기여</p>
+    </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
